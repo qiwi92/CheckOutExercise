@@ -83,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Tests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+            <state relative-caret-position="187">
+              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,8 +106,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="358" />
-    <option name="y" value="-8" />
+    <option name="x" value="181" />
+    <option name="y" value="-13" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -141,7 +141,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536311863320" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536311952942" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -186,6 +186,9 @@
   </component>
   <component name="TestHistory">
     <history-entry file="Tests - 2018.09.07 at 11h 14m 22s.xml">
+      <configuration name="Tests" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="Tests - 2018.09.07 at 11h 14m 39s.xml">
       <configuration name="Tests" configurationId="AndroidJUnit" />
     </history-entry>
   </component>
@@ -258,8 +261,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Tests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        <state relative-caret-position="187">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

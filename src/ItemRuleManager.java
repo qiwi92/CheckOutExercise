@@ -6,6 +6,9 @@ public class ItemRuleManager {
     public void CreateRules() {
         this.itemRulesMap = new HashMap<>();
 
+        ProductDataImporter productDataImporter = new XMLDataImporter();
+
+        //In a real application this should be loaded from a serialized JSON or XML file
         AddNewRule(ItemIdentifier.Apple, new ItemRule( 1, 10));
         AddNewRule(ItemIdentifier.Apple, new ItemRule( 3, 25));
         AddNewRule(ItemIdentifier.Apple, new ItemRule(10, 80));
