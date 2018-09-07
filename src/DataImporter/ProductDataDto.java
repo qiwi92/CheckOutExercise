@@ -1,3 +1,5 @@
+package DataImporter;
+
 public class ProductDataDto{
     public String Id;
     public String ProductName;

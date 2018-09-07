@@ -1,23 +1,29 @@
+package CheckOut;
+
+import ProductManager.ProductRule;
+import ProductManager.ProductRuleManager;
+import ProductManager.ProductRuleManagerExternalData;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class CheckOut {
-    private ItemRuleManager itemRuleManager = new ItemRuleManager();
-    private Map<ItemIdentifier, Integer> itemMap = new HashMap<>();
+public class SuperMarketCheckOut implements CheckOut{
+    private ProductRuleManager itemRuleManager = new ProductRuleManagerExternalData();
+    private Map<String, Integer> itemMap = new HashMap<>();
 
-    public CheckOut() {
+    public SuperMarketCheckOut() {
         itemRuleManager.CreateRules();
     }
 
-    public void Scan(ItemIdentifier itemIdentifier) {
-        ScanItems(itemIdentifier, 1);
+    public void Scan(String productId) {
+        ScanItems(productId, 1);
     }
 
-    public void Scan(ItemIdentifier itemIdentifier, int amount) {
-        ScanItems(itemIdentifier, amount);
+    public void Scan(String productId, int amount) {
+        ScanItems(productId, amount);
     }
 
-    private void ScanItems(ItemIdentifier itemIdentifier, int amount){
+    private void ScanItems(String itemIdentifier, int amount){
         if(!itemRuleManager.DoesItemHaveRule(itemIdentifier)){
             throw new IllegalArgumentException("Item (" + itemIdentifier + ") does not have an assigned rule");
         }
@@ -32,11 +38,11 @@ public class CheckOut {
     public long Total() {
         long total = 0;
 
-        for (Map.Entry<ItemIdentifier, Integer> value : itemMap.entrySet()) {
-            ItemIdentifier itemId = value.getKey();
+        for (Map.Entry<String, Integer> value : itemMap.entrySet()) {
+            String itemId = value.getKey();
             long itemAmount = value.getValue();
 
-            for (ItemRule rule : itemRuleManager.GetRulesForItem(itemId)) {
+            for (ProductRule rule : itemRuleManager.GetRulesForItem(itemId)) {
                 while (itemAmount >= rule.getAmount()) {
                     itemAmount -= rule.getAmount();
                     total += rule.getPrice();
@@ -46,7 +52,5 @@ public class CheckOut {
 
         return total;
     }
-
-
 }
 

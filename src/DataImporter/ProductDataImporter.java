@@ -1,3 +1,5 @@
+package DataImporter;
+
 import java.util.List;
 
 public interface ProductDataImporter{

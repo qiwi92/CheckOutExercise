@@ -1,3 +1,5 @@
+package DataImporter;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,7 +26,7 @@ public class XMLDataImporter implements ProductDataImporter {
 
     private void ImportXML() {
         try {
-            File fXmlFile = new File("./Files/items.xml");
+            File fXmlFile = new File("./files/products.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
