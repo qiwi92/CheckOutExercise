@@ -1,20 +1,21 @@
-package ProductManager;
+package ProductRules;
 
 import DataImporter.ProductDataDto;
 import DataImporter.ProductDataImporter;
-import DataImporter.XMLDataImporter;
-import ProductManager.ProductRule;
-import ProductManager.ProductRuleManager;
+import DataImporter.XMLProductDataImporter;
 
 import java.util.*;
 
 public class ProductRuleManagerExternalData implements ProductRuleManager {
     private Map<String, List<ProductRule>> productMap;
 
-    public void CreateRules() {
+    public ProductRuleManagerExternalData(ProductDataImporter productDataImporter){
+        CreateRules(productDataImporter);
+    }
+
+    private void CreateRules(ProductDataImporter productDataImporter) {
         this.productMap = new HashMap<>();
 
-        ProductDataImporter productDataImporter = new XMLDataImporter();
         List<ProductDataDto> productDataDtos =  productDataImporter.GetProductDataDtos();
 
         for(ProductDataDto productDataDto : productDataDtos){

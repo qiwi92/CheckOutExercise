@@ -1,18 +1,19 @@
 package CheckOut;
 
-import ProductManager.ProductRule;
-import ProductManager.ProductRuleManager;
+import DataImporter.ProductDataImporter;
+import ProductRules.ProductRule;
+import ProductRules.ProductRuleManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SuperMarketCheckOut implements CheckOut{
+
     private ProductRuleManager productRuleManager;
     private Map<String, Integer> itemMap = new HashMap<>();
 
     public SuperMarketCheckOut(ProductRuleManager productRuleManager) {
         this.productRuleManager = productRuleManager;
-        this.productRuleManager.CreateRules();
     }
 
     public void Scan(String productId) {
@@ -24,6 +25,7 @@ public class SuperMarketCheckOut implements CheckOut{
     }
 
     private void ScanItems(String itemIdentifier, int amount){
+
         if(!productRuleManager.DoesItemHaveRule(itemIdentifier)){
             throw new IllegalArgumentException("Item (" + itemIdentifier + ") does not have an assigned rule");
         }
@@ -36,6 +38,7 @@ public class SuperMarketCheckOut implements CheckOut{
     }
 
     public long Total() {
+
         long total = 0;
 
         for (Map.Entry<String, Integer> value : itemMap.entrySet()) {

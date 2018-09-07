@@ -1,4 +1,4 @@
-package ProductManager;
+package ProductRules;
 
 public class ProductRule implements Comparable<ProductRule> {
     private long amount;

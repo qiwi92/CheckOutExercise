@@ -11,16 +11,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLDataImporter implements ProductDataImporter {
+public class XMLProductDataImporter implements ProductDataImporter {
 
     private List<ProductDataDto> productDataDtos = new ArrayList<>();
 
-    public XMLDataImporter() {
+    public XMLProductDataImporter() {
         ImportXML();
     }
 
     @Override
     public List<ProductDataDto> GetProductDataDtos() {
+
         return productDataDtos;
     }
 

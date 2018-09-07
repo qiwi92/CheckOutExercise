@@ -1,6 +1,6 @@
 import DataImporter.ProductDataDto;
 import DataImporter.ProductDataImporter;
-import DataImporter.XMLDataImporter;
+import DataImporter.XMLProductDataImporter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class Tests {
 
     @Test
     void ImporXML(){
-        ProductDataImporter xmlImporter = new XMLDataImporter();
+        ProductDataImporter xmlImporter = new XMLProductDataImporter();
         List<ProductDataDto> productDataDtos = xmlImporter.GetProductDataDtos();
 
         for(ProductDataDto dto : productDataDtos){
