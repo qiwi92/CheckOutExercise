@@ -1,12 +1,16 @@
 package CheckOut;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ProductManager.ProductRule;
 import ProductManager.ProductRuleManager;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-public class CheckOutMock implements CheckOut{
-    private ProductRuleManager itemRuleManagerMock = new ProductRuleManager() {
+public class SuperMarketCheckOutWithMockedProductsTests {
+
+    private ProductRuleManager productRuleManagerMock = new ProductRuleManager() {
+
         private Map<String, List<ProductRule>> productMap;
 
         @Override
@@ -41,9 +45,9 @@ public class CheckOutMock implements CheckOut{
         }
 
         private void AddNewRule(String productId, ProductRule productRule) {
+
             if (productMap.containsKey(productId)) {
                 productMap.get(productId).add(productRule);
-                System.out.println("ProductId:" + productId + "Amount: " + productRule.getAmount());
             } else {
                 LinkedList<ProductRule> newItemRuleList = new LinkedList<>();
                 newItemRuleList.add(productRule);
@@ -53,47 +57,48 @@ public class CheckOutMock implements CheckOut{
         }
     };
 
-    private Map<String, Integer> itemMap = new HashMap<>();
+    @Test
+    void SingleScansReturnCorrectTotalPrice() {
 
-    public CheckOutMock() {
-        itemRuleManagerMock.CreateRules();
+        CheckOut checkOut = new SuperMarketCheckOut(productRuleManagerMock);
+        checkOut.Scan(ProductMockIds.APPLE);
+        checkOut.Scan(ProductMockIds.BREAD);
+
+        assertEquals(10 + 100, checkOut.Total());
     }
 
-    public void Scan(String productId) {
-        ScanItems(productId, 1);
+    @Test
+    void MultipleNotSortedScansReturnCorrectTotalPrice() {
+
+        CheckOut checkOut = new SuperMarketCheckOut(productRuleManagerMock);;
+        checkOut.Scan(ProductMockIds.APPLE);
+        checkOut.Scan(ProductMockIds.BREAD);
+        checkOut.Scan(ProductMockIds.APPLE);
+
+        assertEquals(10 + 100 + 10, checkOut.Total());
     }
 
-    public void Scan(String productId, int amount) {
-        ScanItems(productId, amount);
+    @Test
+    void ScansWithItemRulesReturnCorrectTotalPrice() {
+
+        CheckOut checkOut = new SuperMarketCheckOut(productRuleManagerMock);
+        checkOut.Scan(ProductMockIds.APPLE);
+        checkOut.Scan(ProductMockIds.BREAD);
+        checkOut.Scan(ProductMockIds.APPLE,3);
+        checkOut.Scan(ProductMockIds.APPLE,10);
+
+        assertEquals(10 + 100 + 25 + 70, checkOut.Total());
     }
 
-    private void ScanItems(String itemIdentifier, int amount){
-        if(!itemRuleManagerMock.DoesItemHaveRule(itemIdentifier)){
-            throw new IllegalArgumentException("Item (" + itemIdentifier + ") does not have an assigned rule");
+    @Test
+    void ItemsWithoutRuleThrowExceptionWhenScanned() {
+
+        CheckOut checkOut = new SuperMarketCheckOut(productRuleManagerMock);
+
+        try{
+            checkOut.Scan(ProductMockIds.CARROT);
+        } catch (IllegalArgumentException argumentException){
+            return;
         }
-
-        if (itemMap.containsKey(itemIdentifier)) {
-            itemMap.put(itemIdentifier, itemMap.get(itemIdentifier) + amount);
-        } else {
-            itemMap.put(itemIdentifier, amount);
-        }
-    }
-
-    public long Total() {
-        long total = 0;
-
-        for (Map.Entry<String, Integer> value : itemMap.entrySet()) {
-            String itemId = value.getKey();
-            long itemAmount = value.getValue();
-
-            for (ProductRule rule : itemRuleManagerMock.GetRulesForItem(itemId)) {
-                while (itemAmount >= rule.getAmount()) {
-                    itemAmount -= rule.getAmount();
-                    total += rule.getPrice();
-                }
-            }
-        }
-
-        return total;
     }
 }
